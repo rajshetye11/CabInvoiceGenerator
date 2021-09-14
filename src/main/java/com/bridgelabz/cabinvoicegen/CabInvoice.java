@@ -9,4 +9,13 @@ public class CabInvoice {
 		double fare = distance * costPerKm + time * costPerMin;
 		return fare;
 	}
+	
+	 public double calculateFare(InvoiceData[] data) {
+	        double totalFare=0;
+	        for (InvoiceData datas : data) {
+	           totalFare+= this.calculateFare(datas.distance, datas.time);
+	        }
+	        return totalFare;
+	    }
 }
+
