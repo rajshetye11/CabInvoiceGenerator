@@ -15,7 +15,7 @@ public class CabInvoiceTest {
 		CabInvoice cab = new CabInvoice();
 		double distance = 10.0;
 		double time = 10.0;
-		double fare = cab.calculateFare(distance, time);
+		double fare = cab.calculateFare(distance, time,CabType.NORMAL);
 		assertEquals(110, fare, 0.0);
 	}
 
@@ -26,10 +26,13 @@ public class CabInvoiceTest {
 
         InvoiceData[] ride1={new InvoiceData(1,10.0,5),new InvoiceData(1,2.0,1)};
         InvoiceData[] ride2={new InvoiceData(2,5,5),new InvoiceData(2,11,10),new InvoiceData(2,7,3)};
-        Invoice fare1=cab.calculateFare(ride1);
+        Invoice fare1=cab.calculateFare(ride1,CabType.NORMAL);
         Assert.assertEquals("Invoice [noOFRides=2, totalFare=126.0, avgFare=63.0]",cab.findFareOfGivenId(1));
-        Invoice fare2=cab.calculateFare(ride2);
-        Assert.assertEquals("Invoice [noOFRides=3, totalFare=248.0, avgFare=82.66666666666667]",cab.findFareOfGivenId(2));
+        Invoice fare2=cab.calculateFare(ride2,CabType.PREMIUM);
+        Invoice fare3 = cab.calculateFare(ride2, CabType.NORMAL);
+        
+        Assert.assertEquals("Invoice [noOFRides=3, totalFare=381.0, avgFare=127.0]",cab.findFareOfGivenId(2));
+        Assert.assertEquals("Invoice [noOFRides=3, totalFare=248.0, avgFare=82.66666666666667]",cab.findFareOfGivenId(3));
 
     }
 }
